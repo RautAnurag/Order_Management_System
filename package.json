@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "mongoose": "^8.9.2"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "order_management_system",
+  "description": "order Management System \r Objective :\r Build a backend application that simulates an order Management System with dynamaic discount logic",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
