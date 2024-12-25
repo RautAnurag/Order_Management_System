@@ -1,35 +1,30 @@
 # Order Management System
 
-order Management System 
-Objective :
-Build a backend application that simulates an order Management System with dynamaic discount logic
+## Overview
+The Order Management System (OMS) is a backend application designed to simulate order processing. The application allows users to place orders, calculate total revenue, and retrieve order summaries. The system also supports dynamic discount logic based on the order total and the number of items in the order.
 
-Requirements: 
-1. Core Functionality : 
-Implement RESTful APIs for the following :
+## Features
+- **Place an Order**: Users can place orders with details such as product name, quantity, and price per unit.
+- **Order Summary**: Fetch order details by its unique ID.
+- **Total Revenue**: Get the total revenue generated from all placed orders.
 
-    Place an Order: Accept order details (product name, quantity, and price per unit).
-    Each order should have a unique ID and timestamp.
+## Discount Logic
+- If the total order amount exceeds **Rs 10,000**, a **10% discount** is applied.
+- If the order includes **more than 5 items**, an additional **Rs 500** flat discount is applied.
 
-    Get Order Summary: Retrieve details of an order by unique ID.
-    
-    Calculate Total Revenue: Return the total revenue generated from all placed orders.
+## Setup and Usage
 
-2. Dynamic Logic:
-    Apply a discount rule:
 
-    If the total order amount (quantity*price) exceeds Rs 10,000, apply a 10% discount 
-    
-    If the order includes more than 5 times, apply an additional Rs 500 flat discount.
+### Prerequisites
+- **Node.js**: Install [Node.js](https://nodejs.org/).
+- **npm**: npm comes with Node.js. It is used to manage dependencies.
 
-    Ensure the discount reflect in the stored order data and order summary API response.
 
-3.  Additional Constraints:
+### Installation
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/your-repository/order-management-system.git
+   cd order-management-system
 
-    Use JavaScript along with express JavaScript
-
-    use an in-memory database (eg and array) for storing order data
-
-    Validate all inputs (eg no negative quantities or order)
-
-    
+### How to Start Server CMD
+    node server.js
