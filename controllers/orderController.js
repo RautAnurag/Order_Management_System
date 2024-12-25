@@ -1,12 +1,19 @@
+const { validationResult } = require("express-validator");
+const createError = require("http-errors");
 const Order = require("../models/Order");
 
 // Place an Order
-const placeOrder = async (req, res) => {
+const placeOrder = async (req, res, next) => {
+  const errors = validationResult(req); // Check if there are validation errors
+  if (!errors.isEmpty()) {
+    return next(createError(400, "Validation failed", { errors: errors.array() }));
+  }
+
   try {
     const { productName, quantity, pricePerUnit } = req.body;
 
     if (!productName || quantity <= 0 || pricePerUnit <= 0) {
-      return res.status(400).json({ error: "Invalid input data" });
+      return next(createError(400, "Invalid input data"));
     }
 
     const amount = quantity * pricePerUnit;
@@ -30,29 +37,29 @@ const placeOrder = async (req, res) => {
     await order.save();
     res.status(201).json(order);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    next(createError(500, err.message));
   }
 };
 
 // Get Order Summary
-const getOrderSummary = async (req, res) => {
+const getOrderSummary = async (req, res, next) => {
   try {
     const order = await Order.findById(req.params.id);
-    if (!order) return res.status(404).json({ error: "Order not found" });
+    if (!order) return next(createError(404, "Order not found"));
     res.json(order);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    next(createError(500, err.message));
   }
 };
 
 // Calculate Total Revenue
-const calculateRevenue = async (req, res) => {
+const calculateRevenue = async (req, res, next) => {
   try {
     const orders = await Order.find();
     const totalRevenue = orders.reduce((sum, order) => sum + order.finalAmount, 0);
     res.json({ totalRevenue });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    next(createError(500, err.message));
   }
 };
 
